@@ -1,0 +1,22 @@
+# macOS junk
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Raw data — don't push to public/shared repo
+instagram_story_responses_anonymised.numbers
+
+# Node / build (none today, but here in case we add a build step later)
+node_modules/
+dist/
+.cache/
+
+# Environment
+.env
+.env.local
