@@ -1,0 +1,124 @@
+# Netlify config for the How We Invest microsite
+# Static HTML/CSS, no build step. Netlify serves files from the repo root.
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Friendly URLs (people can visit /guide instead of /guide.html, etc.)
+[[redirects]]
+  from = "/guide"
+  to = "/guide.html"
+  status = 200
+
+[[redirects]]
+  from = "/submit"
+  to = "/submit.html"
+  status = 200
+
+[[redirects]]
+  from = "/hub"
+  to = "/hub/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/hub/videos"
+  to = "/hub/videos.html"
+  status = 200
+
+[[redirects]]
+  from = "/hub/stories"
+  to = "/hub/stories.html"
+  status = 200
+
+[[redirects]]
+  from = "/hub/providers"
+  to = "/hub/providers.html"
+  status = 200
+
+[[redirects]]
+  from = "/hub/glossary"
+  to = "/hub/glossary.html"
+  status = 200
+
+[[redirects]]
+  from = "/hub/questions"
+  to = "/hub/questions.html"
+  status = 200
+
+# Redirect old chapter URLs (now inside /guide) to the right anchor
+[[redirects]]
+  from = "/the-why"
+  to = "/guide#the-why"
+  status = 301
+
+[[redirects]]
+  from = "/the-why.html"
+  to = "/guide#the-why"
+  status = 301
+
+[[redirects]]
+  from = "/the-how"
+  to = "/guide#the-how"
+  status = 301
+
+[[redirects]]
+  from = "/the-how.html"
+  to = "/guide#the-how"
+  status = 301
+
+[[redirects]]
+  from = "/staying-the-course"
+  to = "/guide#staying-the-course"
+  status = 301
+
+[[redirects]]
+  from = "/staying-the-course.html"
+  to = "/guide#staying-the-course"
+  status = 301
+
+[[redirects]]
+  from = "/what-comes-next"
+  to = "/guide#what-comes-next"
+  status = 301
+
+[[redirects]]
+  from = "/what-comes-next.html"
+  to = "/guide#what-comes-next"
+  status = 301
+
+[[redirects]]
+  from = "/lessons"
+  to = "/guide#lessons"
+  status = 301
+
+[[redirects]]
+  from = "/lessons.html"
+  to = "/guide#lessons"
+  status = 301
+
+[[redirects]]
+  from = "/providers"
+  to = "/hub/providers"
+  status = 301
+
+[[redirects]]
+  from = "/providers.html"
+  to = "/hub/providers"
+  status = 301
+
+[[redirects]]
+  from = "/community-hub"
+  to = "/hub"
+  status = 301
+
+[[redirects]]
+  from = "/community-hub.html"
+  to = "/hub"
+  status = 301

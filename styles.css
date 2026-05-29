@@ -613,6 +613,550 @@ footer {
 .privacy-summary p { margin: 0 0 10px; }
 .privacy-summary p:last-child { margin-bottom: 0; }
 
+/* ==============================================
+   NEW STRUCTURE — sidebar layout, chapter sections,
+   homepage entrances, hub landing, glossary search.
+   Added 2026 for the restructured one-page guide.
+   ============================================== */
+
+:root {
+  --sidebar-width: 260px;
+  --tint-intro: #FFFFFF;
+  --tint-why: #F6F2E8;       /* warm cream */
+  --tint-how: #EEF2F2;       /* cool sage */
+  --tint-staying: #F6EEEA;   /* warm blush */
+  --tint-next: #EFF1E8;      /* olive cream */
+  --tint-lessons: #111111;   /* dramatic dark */
+}
+
+/* === Sidebar (only when body has .has-sidebar) === */
+.has-sidebar { padding-left: var(--sidebar-width); }
+.sidebar {
+  position: fixed;
+  top: 53px; left: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - 53px);
+  border-right: 1px solid var(--line);
+  background: var(--paper);
+  overflow-y: auto;
+  z-index: 40;
+  padding: 32px 24px;
+}
+.sidebar-inner { display: flex; flex-direction: column; height: 100%; }
+.sidebar-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--mute);
+  margin-bottom: 18px;
+}
+.sidebar-list {
+  list-style: none; padding: 0; margin: 0 0 24px;
+  border-top: 1px solid var(--line);
+}
+.sidebar-list li {
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-list a {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: baseline;
+  gap: 10px;
+  padding: 14px 4px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.sidebar-list a:hover { background: var(--paper-warm); }
+.sidebar-list a.active {
+  font-weight: 700;
+  background: var(--paper-warm);
+}
+.sidebar-list a.active .num { color: var(--ink); }
+.sidebar-list a .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--mute-soft);
+  letter-spacing: 0;
+}
+.sidebar-foot {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 8px;
+  font-size: 13px;
+}
+.sidebar-link {
+  text-decoration: none;
+  color: var(--mute);
+  padding: 4px 0;
+}
+.sidebar-link:hover { color: var(--ink); }
+
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 35;
+}
+.sidebar-overlay.is-visible { display: block; }
+
+/* Hamburger button — hidden on desktop, shown on mobile */
+.nav-hamburger {
+  display: none;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.nav-hamburger:hover { background: var(--paper-warm); }
+
+/* === Chapter sections (in guide.html scroller) === */
+.guide-main { padding: 0; }
+.chapter {
+  padding: 88px 0 96px;
+  scroll-margin-top: 64px;     /* offset for sticky nav when jumping to anchor */
+  border-bottom: 1px solid var(--line);
+}
+.chapter:last-child { border-bottom: none; }
+.chapter-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.chapter-mark-row { margin-bottom: 14px; }
+.chapter-title {
+  font-size: clamp(40px, 6.5vw, 76px);
+  margin: 0 0 20px;
+  letter-spacing: -0.015em;
+}
+.chapter-title em { font-style: italic; }
+.chapter-lead {
+  font-size: clamp(18px, 2.1vw, 22px);
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  line-height: 1.45;
+  max-width: 680px;
+  margin: 0 0 40px;
+}
+
+/* Narrow content within chapter (replaces .narrow inside chapters so no double padding) */
+.narrow-flush {
+  max-width: 680px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Distinct chapter visual treatments */
+.chapter--intro { background: var(--tint-intro); }
+.chapter--why { background: var(--tint-why); }
+.chapter--how { background: var(--tint-how); }
+.chapter--staying { background: var(--tint-staying); }
+.chapter--next { background: var(--tint-next); }
+.chapter--lessons {
+  background: var(--tint-lessons);
+  color: var(--paper);
+}
+.chapter--lessons .chapter-title,
+.chapter--lessons h3, .chapter--lessons h4 { color: var(--paper); }
+.chapter--lessons p, .chapter--lessons li { color: rgba(255,255,255,0.88); }
+.chapter--lessons .chapter-mark--light,
+.chapter--lessons .chapter-lead--light { color: rgba(255,255,255,0.65); }
+.chapter--lessons .lead { color: var(--paper); }
+.chapter--lessons .quote-card {
+  background: rgba(255,255,255,0.08);
+  border-left-color: var(--paper);
+  color: var(--paper);
+}
+.chapter--lessons .quote-card span { color: rgba(255,255,255,0.55); }
+.chapter--lessons .pull-quote {
+  border-color: rgba(255,255,255,0.4);
+}
+.chapter--lessons .pull-quote-text { color: var(--paper); }
+.chapter--lessons .pull-quote-attr { color: rgba(255,255,255,0.55); }
+.chapter--lessons .big-num {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.chapter--lessons ol strong, .chapter--lessons ul strong { color: var(--paper); }
+.chapter--lessons a { color: var(--paper); }
+
+/* Override .note/.chart/.online-feature backgrounds inside tinted chapters so they pop */
+.chapter--why .note, .chapter--why .chart, .chapter--why .stat-callout, .chapter--why .stop-check,
+.chapter--how .note, .chapter--how .chart, .chapter--how .stat-callout, .chapter--how .stop-check,
+.chapter--staying .note, .chapter--staying .chart, .chapter--staying .stat-callout, .chapter--staying .stop-check,
+.chapter--next .note, .chapter--next .chart, .chapter--next .stat-callout, .chapter--next .stop-check {
+  background: var(--paper);
+}
+.chapter--why .quote-card, .chapter--how .quote-card,
+.chapter--staying .quote-card, .chapter--next .quote-card {
+  background: var(--paper);
+}
+.chapter--why .online-feature, .chapter--how .online-feature,
+.chapter--staying .online-feature, .chapter--next .online-feature {
+  background: rgba(255,255,255,0.5);
+}
+
+/* === Jump-in CTA at top of intro === */
+.jump-in {
+  background: var(--paper-warm);
+  border-left: 3px solid var(--ink);
+  padding: 14px 20px;
+  margin: 32px 0 40px;
+  max-width: 680px;
+  font-size: 15px;
+}
+.jump-in p { margin: 0; }
+.jump-in a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  font-weight: 600;
+}
+
+/* Steps overview list at top of how chapter */
+.steps-overview {
+  font-size: 18px;
+  margin: 0 0 40px;
+  padding-left: 22px;
+}
+.steps-overview li {
+  margin-bottom: 10px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+
+/* CTA card (e.g. "see full provider comparison") */
+.cta-card {
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 28px;
+  margin: 32px 0;
+}
+.cta-card h4 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+.cta-card p {
+  font-size: 14px;
+  color: var(--mute);
+  margin: 0 0 18px;
+}
+
+/* End of guide section */
+.end-of-guide {
+  margin-top: 64px;
+  padding-top: 48px;
+  border-top: 2px solid rgba(255,255,255,0.4);
+}
+.end-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 16px;
+}
+.end-of-guide p { margin-bottom: 24px; }
+.end-of-guide a { color: var(--paper); }
+.end-ctas {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin-top: 28px;
+}
+.chapter--lessons .end-ctas .btn-primary {
+  background: var(--paper); color: var(--ink);
+}
+.chapter--lessons .end-ctas .btn-secondary {
+  color: var(--paper); border-color: var(--paper);
+}
+.chapter--lessons .end-ctas .btn-secondary:hover {
+  background: var(--paper); color: var(--ink);
+}
+
+/* === Homepage hero (replaces .hero, slimmer because we have two entrances below) === */
+.home-hero {
+  padding: 80px 24px 40px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+.home-hero h1 {
+  font-size: clamp(48px, 8vw, 96px);
+  margin: 0 0 24px;
+}
+.home-hero h1 em { font-style: italic; }
+.home-sub {
+  font-size: clamp(17px, 2vw, 21px);
+  max-width: 660px; margin: 0 auto 32px;
+  line-height: 1.5;
+}
+
+/* === Homepage two-card entrance === */
+.home-entrance {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 72px 0 56px;
+}
+.entrance-card {
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 40px;
+  border: 1px solid var(--line);
+  transition: all 0.2s;
+  background: var(--paper);
+}
+.entrance-card:hover {
+  background: var(--paper-warm);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.entrance-card--guide { background: var(--paper-warm); }
+.entrance-card--hub { background: var(--paper); }
+.entrance-card--guide:hover { background: #EFEAE0; }
+.entrance-mark {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 14px;
+}
+.entrance-card h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  margin: 0 0 16px;
+}
+.entrance-card p {
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0 0 24px;
+}
+.entrance-cta {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+}
+.entrance-card:hover .entrance-cta .btn-arrow { transform: translateX(4px); }
+
+.home-footnote {
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  padding: 22px 26px;
+  margin: 32px 0 56px;
+  font-size: 13px;
+  color: var(--mute);
+  line-height: 1.6;
+}
+.home-footnote p { margin: 0; }
+.home-footnote strong { color: var(--ink); }
+
+/* === Hub landing page === */
+.hub-breadcrumb {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 18px;
+}
+.hub-breadcrumb a {
+  color: var(--mute);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.hub-breadcrumb a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.hub-entrance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin: 40px 0 56px;
+}
+.hub-entrance {
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 28px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  transition: all 0.2s;
+}
+.hub-entrance:hover {
+  background: var(--paper-warm);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.hub-entrance-mark {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--mute);
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin-bottom: 14px;
+  background: var(--paper-warm);
+}
+.hub-entrance h3 {
+  font-size: 22px;
+  margin: 0 0 10px;
+}
+.hub-entrance p {
+  font-size: 14px;
+  color: var(--mute);
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+.hub-entrance-cta {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 1px;
+}
+
+.hub-card--ghost p {
+  font-size: 14px;
+  color: var(--mute);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* === Glossary search === */
+.glossary-search {
+  margin: 32px 0 12px;
+}
+.glossary-search input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 14px 18px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  color: var(--ink);
+}
+.glossary-search input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+.glossary code {
+  background: var(--paper-warm);
+  padding: 2px 6px;
+  font-size: 12px;
+  border: 1px solid var(--line);
+}
+
+/* === Top-nav dropdown (Guide chapters) === */
+.nav-menu .nav-has-dropdown {
+  position: relative;
+}
+.nav-menu .nav-has-dropdown > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav-caret {
+  font-size: 10px;
+  line-height: 1;
+  color: var(--mute);
+  transition: transform 0.15s ease;
+}
+.nav-has-dropdown:hover .nav-caret,
+.nav-has-dropdown.is-open .nav-caret { transform: rotate(180deg); }
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: -16px;
+  min-width: 340px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+  padding: 10px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+  z-index: 70;
+}
+.nav-has-dropdown:hover .nav-dropdown,
+.nav-has-dropdown:focus-within .nav-dropdown,
+.nav-has-dropdown.is-open .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+/* invisible bridge so the cursor can travel from the trigger to the dropdown */
+.nav-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -10px; left: 0; right: 0;
+  height: 10px;
+}
+.nav-dropdown a {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 11px 20px;
+  text-decoration: none;
+  color: var(--ink);
+  border-bottom: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 400;
+  transition: background 0.12s ease;
+  border-bottom: 1px solid var(--line);
+}
+.nav-dropdown a:last-child { border-bottom: none; }
+.nav-dropdown a:hover { background: var(--paper-warm); }
+.nav-dropdown a strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.nav-dropdown a span {
+  display: block;
+  font-size: 12px;
+  color: var(--mute);
+  line-height: 1.4;
+}
+
+/* === Mobile/tablet sidebar collapse === */
+@media (max-width: 1080px) {
+  .has-sidebar { padding-left: 0; }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    width: min(300px, 86vw);
+  }
+  .sidebar.is-open { transform: translateX(0); }
+  .nav-hamburger { display: inline-block; }
+}
+
+@media (max-width: 720px) {
+  .home-entrance { grid-template-columns: 1fr; gap: 16px; margin: 48px 0 40px; }
+  .entrance-card { padding: 28px; }
+  .chapter { padding: 56px 0 64px; }
+  .chapter-inner { padding: 0 22px; }
+  .end-ctas { flex-direction: column; align-items: stretch; }
+  .end-ctas .btn { text-align: center; }
+}
+
+/* ==============================================
+   Original mobile rules continue below.
+   ============================================== */
+
 /* Mobile */
 @media (max-width: 920px) {
   .nav-menu { display: none; }
