@@ -20,3 +20,8 @@ dist/
 # Environment
 .env
 .env.local
+
+# Internal working docs — not for the public site
+MONETISATION_STRATEGY.md
+brand/
+outputs/

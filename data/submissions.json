@@ -1,0 +1,5 @@
+{
+  "count": 500,
+  "updated": "2026-06-11",
+  "note": "Live submission count. Baseline = March 2026 Instagram survey. When the Tally form is connected, update this file automatically (Tally webhook -> Netlify function, or scheduled sync) and the counter on every page updates with it."
+}
