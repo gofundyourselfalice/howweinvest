@@ -1611,6 +1611,25 @@ footer {
 @media (max-width: 600px) {
   .manifesto { padding: 56px 24px 64px; }
 }
+/* Manifesto sitting inside the hero, just under the title + subtitle */
+.manifesto--hero {
+  padding: 0;
+  background: transparent;
+  border-bottom: none;
+  text-align: center;
+  margin: 30px auto 4px;
+}
+.manifesto--hero .manifesto-eyebrow { margin-bottom: 16px; }
+.manifesto--hero .manifesto-lead {
+  font-size: clamp(17px, 1.7vw, 20px);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+.manifesto--hero .manifesto-tail {
+  font-size: clamp(19px, 2.1vw, 24px);
+}
 
 /* === "What investing has enabled" section on homepage === */
 .enabled {
@@ -3331,4 +3350,494 @@ body.mobile-nav-open { overflow: hidden; }
 @media (max-width: 720px) {
   .stat-tiles { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .stat-tile { min-height: 120px; padding: 18px 16px 16px; }
+}
+.stat-tile .stat-pre {
+  display: block;
+  font-size: 0.32em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 4px;
+}
+
+/* === "I invest because" — scattered chat bubbles === */
+.chat { max-width: 1000px; margin: 0 auto; }
+
+/* Centred blue question pinned at the top */
+.chat-question {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 44px;
+}
+
+/* Replies spread out across the section, not in one thread */
+.chat-scatter {
+  columns: 3 250px;
+  column-gap: 30px;
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+.chat-bubble {
+  padding: 13px 18px;
+  font-size: 16px;
+  line-height: 1.42;
+  border-radius: 22px;
+  position: relative;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-style: normal;
+  animation: chat-pop 0.4s ease both;
+}
+.chat-bubble--in {
+  background: #E9E9EB;
+  color: #111;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-bottom: 26px;
+  break-inside: avoid;
+}
+/* alternate which side each reply hugs, plus a casual tilt, so they scatter */
+.chat-scatter .chat-bubble:nth-child(odd)  { margin-right: auto; transform: rotate(-1.4deg); }
+.chat-scatter .chat-bubble:nth-child(even) { margin-left: auto;  transform: rotate(1.2deg); }
+.chat-scatter .chat-bubble:nth-child(3n)   { transform: rotate(-0.5deg); }
+
+.chat-bubble--out {
+  background: #0B84FE;
+  color: #fff;
+  max-width: 460px;
+  border-bottom-right-radius: 6px;
+}
+.chat-bubble--out::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -6px;
+  width: 14px;
+  height: 16px;
+  background: radial-gradient(circle at top right, transparent 13px, #0B84FE 14px);
+}
+.chat-bubble--typing {
+  background: #E9E9EB;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  padding: 16px 18px;
+  width: fit-content;
+  margin: 0 auto 26px;
+  break-inside: avoid;
+}
+.chat-bubble--typing span {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--mute-soft);
+  animation: chat-typing 1.3s infinite ease-in-out;
+}
+.chat-bubble--typing span:nth-child(2) { animation-delay: 0.18s; }
+.chat-bubble--typing span:nth-child(3) { animation-delay: 0.36s; }
+@keyframes chat-pop {
+  from { transform: translateY(8px) scale(0.96); opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes chat-typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-bubble { animation: none; }
+  .chat-bubble--typing span { animation: none; }
+}
+@media (max-width: 600px) {
+  .chat-scatter { columns: 1; }
+  .chat-bubble { font-size: 15px; }
+  .chat-bubble--out { max-width: 88%; }
+}
+
+/* === "What investing enabled" — scrolling doodle banner === */
+.enabled-banner {
+  position: relative;
+  overflow: hidden;
+  margin: 8px 0 28px;
+  padding: 4px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 90px, #000 calc(100% - 90px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 90px, #000 calc(100% - 90px), transparent);
+}
+.enabled-banner-track {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  animation: enabled-scroll 80s linear infinite;
+}
+.enabled-banner:hover .enabled-banner-track { animation-play-state: paused; }
+.enabled-card {
+  flex: 0 0 auto;
+  width: 270px;
+  margin: 0;
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.enabled-doodle {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.enabled-card figcaption {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 500;
+}
+@keyframes enabled-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 9px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .enabled-banner-track { animation: none; }
+}
+@media (max-width: 600px) {
+  .enabled-card { width: 230px; }
+}
+
+/* === "How do you compare?" tool === */
+.compare {
+  padding: 8px 0 8px;
+  background: var(--paper);
+}
+.compare-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.compare h2 {
+  font-size: clamp(32px, 4.5vw, 50px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 0 0 18px;
+  line-height: 1.05;
+}
+.compare h2 em { font-style: italic; font-weight: 800; }
+.cmp-select {
+  width: 100%;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 0;
+  cursor: pointer;
+}
+.cmp-go { margin-top: 4px; cursor: pointer; }
+.cmp-output { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 24px; }
+.cmp-verdict {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: var(--paper-warm);
+  border-left: 3px solid var(--ink);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+}
+.cmp-verdict-doodle {
+  width: 52px; height: 52px; flex: 0 0 auto;
+  fill: none; stroke: var(--ink); stroke-width: 2.4;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.cmp-verdict p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--ink);
+}
+.cmp-bars { display: flex; flex-direction: column; gap: 22px; }
+.cmp-bar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+.cmp-bar-label { font-size: 14px; font-weight: 600; color: var(--ink); }
+.cmp-bar-val {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 22px; font-weight: 800; line-height: 1; color: var(--ink);
+}
+.cmp-bar-track {
+  height: 10px;
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.cmp-bar-fill {
+  height: 100%;
+  background: var(--ink);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cmp-bar-note { font-size: 12.5px; color: var(--mute); margin-top: 7px; line-height: 1.4; }
+.cmp-foot { font-size: 12px; color: var(--mute); font-style: italic; margin: 24px 0 0; line-height: 1.5; }
+
+/* Headline number — "people like you typically invest £X a month" */
+.cmp-headline {
+  text-align: center;
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  padding: 26px 20px 24px;
+  margin-bottom: 28px;
+}
+.cmp-headline-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 10px;
+}
+.cmp-headline-num {
+  display: block;
+  font-size: clamp(38px, 6vw, 60px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+}
+.cmp-headline-sub {
+  display: block;
+  font-size: 14px;
+  color: var(--mute);
+  margin-top: 8px;
+}
+
+/* Similar stories */
+.cmp-stories-head {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 28px 0 14px;
+}
+.cmp-stories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.cmp-story {
+  margin: 0;
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cmp-story-doodle {
+  width: 42px; height: 42px; flex: 0 0 auto;
+  fill: none; stroke: var(--ink); stroke-width: 2.4;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.cmp-story figcaption {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 500;
+}
+@media (max-width: 720px) {
+  .cmp-stories { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .cmp-verdict { flex-direction: column; align-items: flex-start; text-align: left; }
+}
+.cmp-browse { margin-top: 26px; cursor: pointer; }
+
+/* === The Window — filterable gallery of real investor snapshots === */
+.window {
+  padding: 64px 0 8px;
+  background: var(--paper);
+}
+.window-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.window h2 {
+  font-size: clamp(32px, 4.5vw, 50px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin: 0 0 18px;
+  line-height: 1.05;
+}
+.window h2 em { font-style: italic; font-weight: 800; }
+.window-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+  padding: 18px;
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  margin: 8px 0 14px;
+}
+.window-filter { flex: 1 1 180px; }
+.window-filter label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--mute);
+  margin-bottom: 6px;
+}
+.window-clear {
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 11px 18px;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+.window-clear:hover { background: var(--ink); color: var(--paper); }
+.window-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mute);
+  margin: 0 0 22px;
+}
+.window-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.window-empty {
+  font-size: 15px;
+  color: var(--mute);
+  font-style: italic;
+  line-height: 1.55;
+  padding: 28px 0;
+  max-width: 520px;
+}
+.wcard {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--ink);
+  padding: 22px;
+}
+.wcard-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+.wcard-doodle {
+  width: 40px; height: 40px; flex: 0 0 auto;
+  fill: none; stroke: var(--ink); stroke-width: 2.4;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.wcard-age {
+  display: block;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.wcard-meta {
+  display: block;
+  font-size: 12.5px;
+  color: var(--mute);
+  margin-top: 4px;
+}
+.wcard-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.wcard-sl {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 3px;
+}
+.wcard-sv {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.wcard-rows { margin: 0 0 16px; }
+.wcard-rows > div {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px dotted var(--line);
+}
+.wcard-rows dt {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mute);
+  padding-top: 2px;
+}
+.wcard-rows dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.wcard-foot { margin-top: auto; }
+.wcard-mistake {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--mute);
+  margin: 0 0 12px;
+}
+.wcard-mistake span {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.wcard-advice {
+  font-family: var(--display-serif);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 920px) {
+  .window-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .window-grid { grid-template-columns: 1fr; }
+  .window-filter { flex: 1 1 100%; }
 }
