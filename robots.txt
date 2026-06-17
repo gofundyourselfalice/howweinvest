@@ -1,0 +1,37 @@
+# How We Invest — robots.txt
+# We WANT AI assistants and search engines to read and cite this site.
+# Replace howweinvest.co.uk below with the real domain once it's live.
+
+# Search engines
+User-agent: *
+Allow: /
+
+# AI assistants / answer engines (explicitly welcomed)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://howweinvest.co.uk/sitemap.xml

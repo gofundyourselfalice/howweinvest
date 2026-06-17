@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="190" viewBox="0 0 220 190" role="img" aria-label="A coin blooming from a small potted plant, with an upward growth arrow">
+  <defs>
+    <filter id="ink" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.017" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M84 150 L122 150 L116 176 L90 176 Z"/>
+    <path d="M80 150 H126"/>
+    <path d="M103 150 Q99 122 103 98"/>
+    <path d="M103 122 Q83 120 78 102 Q93 100 103 117"/>
+    <path d="M103 116 Q123 114 128 96 Q112 97 103 111"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#C97A3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="103" cy="80" r="17"/>
+    <path d="M98 88 Q98 73 108 73 M95 81 H110"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M150 158 L162 132 L172 144 L188 104"/>
+    <path d="M178 104 L188 100 L191 111"/>
+  </g>
+</svg>

@@ -237,6 +237,31 @@ This database becomes the live dataset that powers every future "how do I compar
 
 ---
 
+## Extra fields for "The Window" (real-portfolio gallery)
+
+The homepage now has a prototype called **The Window** — a filterable gallery where each card is one real person: their age, income, what they actually hold, what they put away monthly, their biggest mistake, and one line of advice. Almost everything it needs is already captured above. To make the cards feel like real, specific people rather than category tick-boxes, add these:
+
+### Q11b · Roughly how is your portfolio split? **(the important one)**
+- Type: **Short answer text** · Optional · Character limit: 120 · (only shown if Q6 = Yes)
+- Placeholder: *"e.g. 80% global tracker, 10% S&P 500, 10% cash"*
+- Why: Q11 captures *what types* someone holds, but the Window's whole value is the *mix*. This single free-text line is what turns a card from generic to genuinely useful. Without it, the gallery can't show real allocations.
+
+### Q4b · What's your job? (one or two words)
+- Type: **Short answer text** · Optional · Character limit: 40
+- Placeholder: *"e.g. NHS nurse, teacher, freelance designer"*
+- Why: Q4 only captures employment *status*. A job title is what makes a card relatable ("a nurse like me does this"). Never published alongside the Instagram handle; treated as anonymous colour.
+
+### Q7b · What age did you start investing? (optional)
+- Type: **Number** · Optional · (only shown if Q6 = Yes)
+- Why: lets each card show "investing since age 28" precisely. If you'd rather not add it, the existing Q7 (how long investing) plus age band approximates it.
+
+### One mapping note
+The Window filters income in £30k / £50k / £80k bands; Q5 uses £25k / £40k / £60k / £90k. They don't need to match exactly — the site maps bands to the nearest bucket — but if you want them aligned, switch Q5 to: Under £30k · £30k–£50k · £50k–£80k · £80k–£120k · £120k+ · Prefer not to say.
+
+**Moderation:** because these cards are individual and detailed, add one more Notion column — **Window-ready** (checkbox) — so you can hand-pick which complete, well-written submissions appear in the public gallery.
+
+---
+
 ## Once it's live
 
 1. Copy the Tally embed code (Tally → Share → Embed)

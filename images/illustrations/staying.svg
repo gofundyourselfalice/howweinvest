@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="190" viewBox="0 0 220 190" role="img" aria-label="A little boat with a sail riding gentle waves">
+  <defs>
+    <filter id="ink" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.017" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M74 120 H146 L132 142 Q110 150 88 142 Z"/>
+    <path d="M110 120 V58"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#C97A3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M110 62 L150 110 H110 Z"/>
+    <path d="M104 110 L70 110 L104 66 Z"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M30 158 q14 -10 28 0 t28 0 t28 0 t28 0 t28 0"/>
+    <path d="M40 170 q14 -10 28 0 t28 0 t28 0 t28 0"/>
+  </g>
+</svg>

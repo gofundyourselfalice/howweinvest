@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="190" viewBox="0 0 220 190" role="img" aria-label="A warm mug of tea">
+  <defs>
+    <filter id="ink" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.017" numOctaves="2" seed="2" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M78 96 H140 V138 Q140 156 122 156 H96 Q78 156 78 138 Z"/>
+    <path d="M140 104 Q166 104 166 122 Q166 138 142 138"/>
+    <path d="M66 166 H152"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#C97A3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M100 82 q9 -9 0 -18 q-9 -9 0 -18"/>
+    <path d="M122 82 q9 -9 0 -18 q-9 -9 0 -18"/>
+  </g>
+</svg>

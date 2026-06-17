@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="190" viewBox="0 0 220 190" role="img" aria-label="An open book with a glowing lightbulb above it">
+  <defs>
+    <filter id="ink" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.017" numOctaves="2" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M110 150 C91 139 67 137 48 141 L48 116 C67 112 91 114 110 126 Z"/>
+    <path d="M110 150 C129 139 153 137 172 141 L172 116 C153 112 129 114 110 126 Z"/>
+    <path d="M110 126 L110 150"/>
+    <path d="M60 124 q18 -3 38 6 M58 132 q18 -3 38 6" stroke-width="1.5"/>
+    <path d="M160 124 q-18 -3 -38 6 M162 132 q-18 -3 -38 6" stroke-width="1.5"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M110 96 C99 96 92 88 92 79 C92 68 100 60 110 60 C120 60 128 68 128 79 C128 88 121 96 110 96 Z"/>
+    <path d="M103 96 q7 5 14 0"/>
+    <path d="M104 101 h12 M106 105 h8"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#C97A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M110 50 v-9 M84 60 l-7 -6 M136 60 l7 -6 M74 80 h-8 M154 80 h8"/>
+  </g>
+</svg>

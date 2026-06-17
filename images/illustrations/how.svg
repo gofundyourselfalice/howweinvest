@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="190" viewBox="0 0 220 190" role="img" aria-label="A hand-drawn staircase climbing upward with a flag at the top, one step at a time">
+  <defs>
+    <filter id="ink" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.017" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M34 162 H66 V140 H98 V118 H130 V96 H162 V74"/>
+    <path d="M34 162 V150 H66 V128 H98 V106 H130 V84 H162 V74"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#C97A3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M162 74 V40"/>
+    <path d="M162 44 L188 51 L162 60 Z"/>
+  </g>
+</svg>

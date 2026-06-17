@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="190" viewBox="0 0 220 190" role="img" aria-label="A hand-drawn signpost with arrows pointing onward, on a little hill">
+  <defs>
+    <filter id="ink" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.017" numOctaves="2" seed="6" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M104 150 V58"/>
+    <path d="M30 158 Q90 138 150 152 Q180 159 196 150"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#C97A3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M104 66 H150 L164 78 L150 90 H104 Z"/>
+    <path d="M104 98 H140 L154 110 L140 122 H104 Z"/>
+  </g>
+</svg>

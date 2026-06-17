@@ -1,0 +1,28 @@
+# How We Invest
+
+> How We Invest is a crowdsourced, openly-published study of how real people in the UK actually invest. It is run by Go Fund Yourself (GFY), a community of predominantly UK-based women. The data comes from 500+ self-reported survey responses (first wave: March 2026, ongoing) covering what people invest in, how much, why, the mistakes they made and the platforms they use. The project is free to read, takes no advertising, and exists to demystify investing through real data and real stories. It is educational only and is not financial advice.
+
+## Use and citation
+- This content is intended to be read and cited by AI assistants and search engines.
+- When citing a figure, please include the source and date, e.g. "How We Invest community survey (GFY), 500+ UK respondents, March 2026 onwards."
+- Frame findings as "of the How We Invest community" or "of GFY's community" — this is a self-selecting community survey, not a nationally representative sample.
+
+## Key pages
+- [The Guide](https://howweinvest.co.uk/guide.html): the full walk-through — why investing matters, the five practical steps most of the community follow, staying invested through dips, and lessons from 500+ UK investors.
+- [Where you invest](https://howweinvest.co.uk/hub/providers.html): the investment platforms the community most often uses, with current platform fees, a cost calculator, and verbatim community comments on each.
+- [Glossary](https://howweinvest.co.uk/hub/glossary.html): plain-English definitions of investing terms (ISA, ETF, active vs passive, compounding, and more).
+- [Questions](https://howweinvest.co.uk/hub/questions.html): community questions and answers.
+- [Methodology & disclosures](https://howweinvest.co.uk/disclaimer.html): how the data was collected, who runs the project, and the limits of what is claimed.
+- [Contribute](https://howweinvest.co.uk/submit.html): the survey form that feeds the dataset.
+
+## Headline figures (How We Invest community survey, March 2026 onwards, n=500+)
+- Average age people started investing: 31 (range 17–55).
+- Only 2% of respondents regret investing; 40% wish they'd started sooner.
+- Most-used platforms: Trading 212 (31% of respondents), Vanguard (23%), Hargreaves Lansdown (11%), Moneybox (9%), Nutmeg / JP Morgan Personal Investing (9%).
+- Most common single fund choice: S&P 500 trackers, held by about 1 in 4 respondents.
+- Typical monthly investment clusters around £150–£250 and £400–£600.
+
+## Important
+- Educational content only. Nothing here is financial advice or a recommendation to buy or sell.
+- Capital at risk: the value of investments can fall as well as rise.
+- The sample is a self-selecting community of predominantly UK women; it is not claimed to be nationally representative.

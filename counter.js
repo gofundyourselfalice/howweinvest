@@ -29,8 +29,8 @@
   function animate(el, target, withPlus) {
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced || target <= 0) { render(el, target, withPlus); return; }
-    var start = Math.max(0, Math.floor(target * 0.9));
-    var duration = 900;
+    var start = 0;
+    var duration = 1600;
     var t0 = null;
     function step(ts) {
       if (!t0) t0 = ts;

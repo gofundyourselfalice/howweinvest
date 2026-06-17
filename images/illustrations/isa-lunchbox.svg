@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="170" viewBox="0 0 240 170" role="img" aria-label="An open lunchbox holding a coin, a little rising chart and a small pie chart">
+  <defs>
+    <filter id="ink" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M58 84 H182 V140 Q182 147 175 147 H65 Q58 147 58 140 Z"/>
+    <path d="M58 84 L70 58 H170 L182 84"/>
+    <path d="M104 58 q16 -12 32 0" stroke-width="2"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#C97A3A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="86" cy="116" r="14"/>
+    <path d="M90 110 c-7 -2 -11 3 -11 8 l0 10" stroke-width="1.6"/>
+    <path d="M79 123 h12" stroke-width="1.6"/>
+    <path d="M76 117 h10" stroke-width="1.6"/>
+  </g>
+  <g filter="url(#ink)" fill="none" stroke="#1b1b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M116 128 L126 116 L134 122 L146 104"/>
+    <path d="M146 104 l-6 0 M146 104 l0 6" stroke-width="1.6"/>
+    <circle cx="174" cy="116" r="13"/>
+    <path d="M174 116 L174 103 M174 116 L186 120" stroke-width="1.6"/>
+  </g>
+</svg>
