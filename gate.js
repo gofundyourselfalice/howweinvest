@@ -18,16 +18,29 @@
   }
 
   function postEmail(email, source) {
+    // 1) Record the submission in Netlify Forms (gives a backup list in the
+    //    Netlify dashboard, and a CSV export).
     var body = new URLSearchParams();
     body.append('form-name', 'email-capture');
     body.append('email', email);
     body.append('source', source || '');
     body.append('bot-field', '');
-    return fetch('/', {
+    var toForms = fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: body.toString()
-    });
+    }).catch(function () {});
+
+    // 2) Forward straight to Flodesk via our function. We call it directly rather
+    //    than relying on Netlify's "submission-created" event, which did not fire
+    //    reliably for AJAX form submissions.
+    var toFlodesk = fetch('/.netlify/functions/submission-created', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ payload: { data: { email: email, source: source || '' } } })
+    }).catch(function () {});
+
+    return Promise.all([toForms, toFlodesk]);
   }
 
   function wireForms() {
