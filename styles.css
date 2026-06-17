@@ -1646,6 +1646,14 @@ footer {
   height: auto;
   display: block;
 }
+/* Hand-drawn cats used as chapter illustrations: size by height, keep aspect */
+.chapter-illustration img.chapter-cat { width: auto; height: 200px; max-width: 100%; }
+.chapter-illustration img.chapter-cat--wide { width: 300px; height: auto; }
+.end-cat img.chapter-cat { width: auto; height: 168px; display: block; margin: 0 auto; filter: invert(1) brightness(1.7); }
+@media (max-width: 600px) {
+  .chapter-illustration img.chapter-cat { height: 160px; }
+  .chapter-illustration img.chapter-cat--wide { width: 240px; }
+}
 @media (max-width: 600px) {
   .chapter-illustration img,
   .chapter-illustration svg { width: 260px; }
@@ -2926,9 +2934,9 @@ body.mobile-nav-open { overflow: hidden; }
 .gloss::after {
   content: "🐱  " attr(data-def);
   position: absolute;
-  bottom: calc(100% + 36px);
-  left: 50%;
-  transform: translate(-50%, 6px);
+  bottom: calc(100% + 12px);
+  left: 0;
+  transform: translate(0, 6px);
   background: #FCE3EF;
   color: #7A2350;
   border: 1.5px solid #F3A9CE;
@@ -2956,7 +2964,7 @@ body.mobile-nav-open { overflow: hidden; }
   opacity: 1;
   visibility: visible;
 }
-.gloss:hover::after, .gloss:focus::after { transform: translate(-50%, 0); }
+.gloss:hover::after, .gloss:focus::after { transform: translate(0, 0); }
 
 /* Edge-aware alignment — set by nav.js based on viewport position */
 .gloss[data-tooltip-align="left"]::after {
@@ -4557,7 +4565,7 @@ body.mobile-nav-open { overflow: hidden; }
 .email-body p:last-child { margin-bottom: 0; }
 
 /* Little chapter illustrations in the guide dropdown */
-.nav-mega-img { display: block; width: auto; height: 46px; margin: 2px 0 10px; }
+.nav-mega-img { display: block; align-self: flex-start; width: auto; height: 46px; object-fit: contain; margin: 2px 0 10px; }
 @media (max-width: 900px) { .nav-mega-img { display: none; } }
 
 /* Sign-up perk vs Sponsored badges (providers page) */
@@ -4599,6 +4607,37 @@ body.mobile-nav-open { overflow: hidden; }
 .prov-voice { margin: 0 0 5px; font-family: var(--display-serif); font-style: italic; font-size: 14.5px; line-height: 1.4; color: var(--ink); }
 .prov-voice:last-child { margin-bottom: 0; }
 
+/* === Providers: clearer card separation + reserved offer/words slots === */
+.prov-list { gap: 18px; }
+.prov {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent-soft);
+  border-radius: 16px;
+  padding: 24px 24px;
+  background: #fff;
+}
+.prov:last-child { border-bottom: 1px solid var(--line); }
+.prov-list--supporters .prov { border-left-color: #CdbfE6; }
+/* more breathing room between the fee/content and the visit button */
+.prov-foot { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+/* reserved placeholders so platforms can see where their offer + words go */
+.prov-offer--placeholder, .prov-said--placeholder {
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  padding: 10px 13px;
+  margin: 12px 0 0;
+  background: rgba(241, 233, 220, 0.45);
+}
+.prov-offer--placeholder .prov-offer-text { font-style: normal; }
+.prov-said--placeholder p { margin: 4px 0 0; font-style: normal; }
+.prov-offer--placeholder a, .prov-said--placeholder a { color: var(--accent); font-weight: 600; }
+/* partnerships contact */
+.partner-contact { margin: 56px 0 8px; padding: 32px 34px; background: var(--paper-warm); border-radius: 18px; }
+.partner-contact h2 { margin: 0 0 10px; font-size: 26px; }
+.partner-contact p { margin: 0 0 8px; color: var(--ink); max-width: 660px; line-height: 1.6; }
+.partner-contact-email { font-weight: 500; }
+.partner-contact-email a { color: var(--accent); font-weight: 700; border-bottom: 1px solid var(--accent); text-decoration: none; }
+
 /* === Email gate === */
 [data-gate] .gate-reveal { display: none; }
 [data-gate].is-unlocked .gate-reveal { display: block; }
@@ -4636,6 +4675,21 @@ body.mobile-nav-open { overflow: hidden; }
 .bench-line strong { color: var(--accent); }
 .bench-fine { font-size: 12.5px; color: var(--mute); font-style: italic; margin: 14px 0 0; }
 #bn-go { margin-top: 4px; cursor: pointer; }
+
+/* Compare tool — deeper purple card */
+.bench-tool { background: #3E2C55; border-color: #3E2C55; color: #F2ECFA; border-radius: 16px; }
+.bench-tool .tool-control label { color: #C9B8E0; }
+.bench-tool .tool-control-value { color: #fff; }
+.bench-tool .tool-control input[type="range"]::-webkit-slider-runnable-track { background: rgba(255,255,255,0.28); }
+.bench-tool .tool-control input[type="range"]::-moz-range-track { background: rgba(255,255,255,0.28); }
+.bench-tool #bn-go { background: #fff; color: var(--ink); border-color: #fff; }
+.bench-tool #bn-go:hover { background: var(--accent-soft); color: var(--ink); }
+.bench-tool .bench-lock-copy { color: #EADFF6; }
+.bench-tool .bench-lock-fine, .bench-tool .bench-lock-fine a { color: #C9B8E0 !important; }
+.bench-tool .bench-line { color: #F2ECFA; }
+.bench-tool .bench-line strong { color: #fff; }
+.bench-tool .bench-fine { color: #C9B8E0; }
+.bench-tool .bench-fine a { color: #fff; }
 
 /* === Share How We Invest === */
 .share-hwi { background: var(--paper-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 48px 0; margin: 56px 0 0; text-align: center; }
