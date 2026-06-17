@@ -1647,12 +1647,12 @@ footer {
   display: block;
 }
 /* Hand-drawn cats used as chapter illustrations: size by height, keep aspect */
-.chapter-illustration img.chapter-cat { width: auto; height: 200px; max-width: 100%; }
-.chapter-illustration img.chapter-cat--wide { width: 300px; height: auto; }
-.end-cat img.chapter-cat { width: auto; height: 168px; display: block; margin: 0 auto; filter: invert(1) brightness(1.7); }
+.chapter-illustration img.chapter-cat { width: auto; height: 150px; max-width: 100%; }
+.chapter-illustration img.chapter-cat--wide { width: 188px; height: auto; }
+.end-cat img.chapter-cat { width: auto; height: 116px; display: block; margin: 0 auto; filter: invert(1) brightness(1.7); }
 @media (max-width: 600px) {
-  .chapter-illustration img.chapter-cat { height: 160px; }
-  .chapter-illustration img.chapter-cat--wide { width: 240px; }
+  .chapter-illustration img.chapter-cat { height: 120px; }
+  .chapter-illustration img.chapter-cat--wide { width: 150px; }
 }
 @media (max-width: 600px) {
   .chapter-illustration img,
@@ -1968,6 +1968,20 @@ footer {
   gap: 16px;
   font-size: 11px;
 }
+/* footer quick-links row (Where we invest · Glossary · email) */
+.footer-thin-links {
+  flex: 1 1 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  padding-bottom: 14px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid var(--line);
+}
+.footer-thin-links a { font-weight: 600; border-bottom: none; font-size: 13px; }
+.footer-thin-links a:hover { color: var(--accent); }
+/* GFY logo on the community page */
+.community-gfy-logo { display: block; height: 44px; width: auto; margin: 0 0 16px; }
 
 /* === Provider cards (alphabetical, by category) === */
 .provider-category {
@@ -4631,12 +4645,17 @@ body.mobile-nav-open { overflow: hidden; }
 .prov-offer--placeholder .prov-offer-text { font-style: normal; }
 .prov-said--placeholder p { margin: 4px 0 0; font-style: normal; }
 .prov-offer--placeholder a, .prov-said--placeholder a { color: var(--accent); font-weight: 600; }
-/* partnerships contact */
+/* partnerships — simple contact details */
 .partner-contact { margin: 56px 0 8px; padding: 32px 34px; background: var(--paper-warm); border-radius: 18px; }
 .partner-contact h2 { margin: 0 0 10px; font-size: 26px; }
 .partner-contact p { margin: 0 0 8px; color: var(--ink); max-width: 660px; line-height: 1.6; }
 .partner-contact-email { font-weight: 500; }
 .partner-contact-email a { color: var(--accent); font-weight: 700; border-bottom: 1px solid var(--accent); text-decoration: none; }
+/* little "How do you compare?" button linking back to the homepage tool */
+.compare-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; background: #3E2C55; color: #fff; font-weight: 600; font-size: 14px; padding: 9px 17px; border-radius: 999px; text-decoration: none; transition: transform .12s ease, background .12s ease; }
+.compare-cta:hover { transform: translateY(-2px); background: #4A3768; }
+.compare-cta .btn-arrow { transition: transform .12s ease; }
+.compare-cta:hover .btn-arrow { transform: translateX(3px); }
 
 /* === Email gate === */
 [data-gate] .gate-reveal { display: none; }
@@ -4675,6 +4694,17 @@ body.mobile-nav-open { overflow: hidden; }
 .bench-line strong { color: var(--accent); }
 .bench-fine { font-size: 12.5px; color: var(--mute); font-style: italic; margin: 14px 0 0; }
 #bn-go { margin-top: 4px; cursor: pointer; }
+
+/* === Homepage: clean alternating section rhythm (kills the white-gap stripes) ===
+   Warm and light bands alternate, butt directly together (no margins/borders),
+   with consistent vertical padding. */
+.for-everyone { background: var(--paper-warm); padding: 64px 24px; }
+.bench { background: var(--paper); padding: 60px 0 66px; }
+.invest-because { background: var(--paper-warm); border: none; margin: 0; padding: 64px 0; }
+.enabled { background: var(--paper); border: none; padding: 64px 0 72px; }
+.community-marquee { background: var(--paper-warm); }
+.why-cat.for-everyone { background: var(--paper); }
+.share-hwi { background: var(--paper-warm); border: none; margin: 0; padding: 64px 0; }
 
 /* Compare tool — deeper purple card */
 .bench-tool { background: #3E2C55; border-color: #3E2C55; color: #F2ECFA; border-radius: 16px; }
