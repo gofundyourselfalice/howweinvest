@@ -126,6 +126,8 @@
       <p>A few platforms offer our readers something, like a free share or a welcome bonus, when you join through our link. Where that's the case, the card carries a perk badge. It has no bearing on the order here. These are the platforms the community actually uses, nothing has paid its way onto this list.</p>
     </div>
 
+    <h2 class="costbar-heading">What about <em>fees</em>?</h2>
+    <p class="costbar-sub">Drag the slider to see what each platform would cost you in a year.</p>
     <div class="prov-costbar">
       <img class="prov-costbar-cat" src="../images/cat-logo.png" alt="" aria-hidden="true">
       <label for="calc-amt">If you invested</label>
@@ -455,7 +457,7 @@
 
     <section class="partner-contact">
       <h2>Work with us</h2>
-      <p>Are you one of the platforms above, or a brand who'd like to collaborate? There's space here for a sign-up offer or co-created content, whether or not you run an affiliate programme. We keep this list community-led and transparent.</p>
+      <p>Are you one of the platforms above, or a brand who would like to support this project? There's space here for a sign-up offer or co-created content, whether or not you run an affiliate programme. We keep this list community-led and transparent.</p>
       <p class="partner-contact-email">Partnerships &amp; content: <a href="mailto:alice@gfy.co.uk">alice@gfy.co.uk</a></p>
     </section>
 </main>
@@ -602,14 +604,14 @@
         '<span class="prov-offer-text">[sign up offer goes here]</span>';
       insertAfter(offer);
 
-      // Vanguard-style platforms (no affiliate): a content collaboration slot
-      if (p.id === 'vanguard') {
-        var collab = document.createElement('div');
-        collab.className = 'prov-said prov-said--placeholder';
-        collab.innerHTML = '<span class="prov-said-label">Collaboration</span>' +
-          '<p>[collaboration content placeholder]</p>';
-        insertAfter(collab);
-      }
+      // the platform's own words: a note, a link, or a video
+      var said = document.createElement('div');
+      said.className = 'prov-said prov-said--placeholder';
+      var saidText = (p.id === 'vanguard')
+        ? '[collaboration content goes here, e.g. a note, a link or a video]'
+        : '[a note, a link or a video from the platform goes here]';
+      said.innerHTML = '<span class="prov-said-label">In their words</span><p>' + saidText + '</p>';
+      insertAfter(said);
 
       // what the community said
       var voices = VOICES[p.id];
@@ -695,7 +697,18 @@
     wire('.prov-sort', 'data-sort', function (v) { curSort = v; apply(); });
 
     if (amt) {
-      amt.addEventListener('input', function () { updateCosts(); if (curSort === 'cost') apply(); });
+      var costRaf = false;
+      amt.addEventListener('input', function () {
+        // cheap, instant feedback on the number
+        amtVal.textContent = (+amt.value).toLocaleString('en-GB');
+        // throttle the heavier per-card cost rewrite to one paint frame
+        if (!costRaf) {
+          costRaf = true;
+          requestAnimationFrame(function () { updateCosts(); costRaf = false; });
+        }
+      });
+      // only re-sort when the drag finishes, to avoid reflow thrash mid-drag (the mobile glitch)
+      amt.addEventListener('change', function () { if (curSort === 'cost') apply(); });
       updateCosts();
     }
     apply();

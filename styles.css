@@ -2621,6 +2621,10 @@ body.mobile-nav-open .mobile-nav-overlay {
   opacity: 1;
 }
 body.mobile-nav-open { overflow: hidden; }
+/* The drawer lives inside the sticky .nav (its own stacking context), so lift
+   the whole nav above the body-level overlay when open, or the menu hides
+   behind the dim layer. This is what broke the mobile menu. */
+body.mobile-nav-open .nav { z-index: 100; }
 
 /* === Top-nav dropdown (Guide chapters) === */
 .nav-menu .nav-has-dropdown {
@@ -4656,6 +4660,10 @@ body.mobile-nav-open { overflow: hidden; }
 .compare-cta:hover { transform: translateY(-2px); background: #4A3768; }
 .compare-cta .btn-arrow { transition: transform .12s ease; }
 .compare-cta:hover .btn-arrow { transform: translateX(3px); }
+/* "What about fees?" intro above the cost-calculator cat */
+.costbar-heading { font-size: clamp(22px, 3.2vw, 30px); font-weight: 800; letter-spacing: -0.02em; margin: 30px 0 6px; }
+.costbar-heading em { font-style: italic; font-weight: 400; color: var(--accent); font-family: var(--display-serif); }
+.costbar-sub { color: var(--mute); font-size: 15px; line-height: 1.5; margin: 0 0 14px; max-width: 560px; }
 
 /* === Email gate === */
 [data-gate] .gate-reveal { display: none; }
@@ -4714,8 +4722,10 @@ body.mobile-nav-open { overflow: hidden; }
 .bench-tool .tool-control input[type="range"]::-moz-range-track { background: rgba(255,255,255,0.28); }
 .bench-tool #bn-go { background: #fff; color: var(--ink); border-color: #fff; }
 .bench-tool #bn-go:hover { background: var(--accent-soft); color: var(--ink); }
-.bench-tool .bench-lock-copy { color: #EADFF6; }
-.bench-tool .bench-lock-fine, .bench-tool .bench-lock-fine a { color: #C9B8E0 !important; }
+/* the email gate sits on a cream card inside the purple tool, so its text is dark */
+.bench-tool .bench-lock-copy { color: var(--ink); }
+.bench-tool .bench-lock-fine { color: var(--mute) !important; }
+.bench-tool .bench-lock-fine a { color: var(--accent) !important; }
 .bench-tool .bench-line { color: #F2ECFA; }
 .bench-tool .bench-line strong { color: #fff; }
 .bench-tool .bench-fine { color: #C9B8E0; }
