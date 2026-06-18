@@ -92,15 +92,15 @@
       var years = +yearsEl.value;
       var data = [];
       for (var y = 0; y <= years; y++) {
-        // Cash (real terms, slightly losing to inflation)
-        var cashReal = amount * Math.pow(1.0 - 0.005, y); // -0.5% real per year
-        // Invested at 7% real annual return — with some smoothed dips
-        var stocksReal = amount * Math.pow(1.07, y);
-        // Slight dip around year 8 (GFC), year 20 (Covid), year 22 (inflation)
-        if (y === 8 || y === 9) stocksReal *= 0.74;
-        if (y === 20) stocksReal *= 0.85;
-        if (y === 22) stocksReal *= 0.92;
-        data.push({ year: y, cash: cashReal, stocks: stocksReal });
+        // Cash: grows at ~3.5% a year (around the average UK easy-access savings rate)
+        var cash = amount * Math.pow(1.035, y);
+        // Invested: illustrative ~7% a year, with some smoothed dips
+        var stocks = amount * Math.pow(1.07, y);
+        // Dips around year 8 (GFC), year 20 (Covid), year 22 (inflation)
+        if (y === 8 || y === 9) stocks *= 0.74;
+        if (y === 20) stocks *= 0.85;
+        if (y === 22) stocks *= 0.92;
+        data.push({ year: y, cash: cash, stocks: stocks });
       }
 
       var finalCash = data[data.length - 1].cash;

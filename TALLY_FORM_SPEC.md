@@ -262,6 +262,20 @@ The Window filters income in £30k / £50k / £80k bands; Q5 uses £25k / £40k 
 
 ---
 
+## Provider feedback questions (new — adds value for platform partners)
+
+### Q12 · What do you like, and dislike, about the platform(s) you use?
+- Type: **Long answer text** · Optional
+- Placeholder: *"e.g. Love how simple the app is, but wish the fees were clearer and customer service was faster."*
+- Why: candid, unfiltered user feedback on each provider. Feeds the "What the community said" sections on the *Where We Invest* page, and is exactly the honest voice platforms rarely get to hear.
+
+### Q13 · What nearly stopped you choosing your platform — or what would make you leave it?
+- Type: **Long answer text** · Optional
+- Placeholder: *"e.g. Almost didn't sign up because of the fees; I'd switch if a cheaper option offered Junior ISAs."*
+- Why: this is the one most providers **don't** have — the hesitations that nearly lost them a customer, and the triggers that would make someone leave. Aggregated and anonymised, it's genuinely valuable acquisition + retention data to offer a platform partner.
+
+---
+
 ## Once it's live
 
 1. Copy the Tally embed code (Tally → Share → Embed)
