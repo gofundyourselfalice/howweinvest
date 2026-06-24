@@ -100,6 +100,7 @@
       </li>
       <li><a href="hub/providers.html" class="nav-tip" data-tip="The platforms our community actually uses, with fees and current sign-up offers.">Invest now</a></li>
       <li><a href="hub/index.html">Community</a></li>
+      <li><a href="hub/stories.html">Stories</a></li>
     </ul>
     <a href="submit.html" class="nav-cta">Contribute</a>
   </div>
@@ -138,7 +139,7 @@
 
   <div class="stat-tiles">
     <div class="stat-tile stat-tile--a"><svg class="stat-doodle" aria-hidden="true"><use href="#sd-pen"/></svg><div class="stat-num" data-live-count>500+</div><div class="stat-label">Submissions</div></div>
-    <div class="stat-tile stat-tile--b"><svg class="stat-doodle" aria-hidden="true"><use href="#sd-plant"/></svg><div class="stat-num"><span class="stat-pre">only</span>2%</div><div class="stat-label">Regret investing</div></div>
+    <div class="stat-tile stat-tile--b"><svg class="stat-doodle" aria-hidden="true"><use href="#sd-plant"/></svg><div class="stat-num">98%</div><div class="stat-label">Don’t regret investing</div></div>
     <div class="stat-tile stat-tile--c"><svg class="stat-doodle" aria-hidden="true"><use href="#sd-cat"/></svg><div class="stat-num">31</div><div class="stat-label">Average starting age</div></div>
     <div class="stat-tile stat-tile--d"><svg class="stat-doodle" aria-hidden="true"><use href="#sd-clock"/></svg><div class="stat-num">40%</div><div class="stat-label">Wished they'd started sooner</div></div>
   </div>
@@ -246,7 +247,9 @@
         <symbol id="dd-gift" viewBox="0 0 64 64"><rect x="16" y="29" width="32" height="22" rx="2"/><path d="M13 29 H51 V37 H13 Z"/><path d="M32 29 V51"/><path d="M32 29 C30 23 24 21 24 25 C24 29 30 29 32 29 C34 29 40 29 40 25 C40 21 34 23 32 29 Z"/></symbol>
       </defs></svg>
 
-      <div class="enabled-banner" role="region" aria-label="What investing enabled, in the community's words">
+      <div class="enabled-banner-wrap">
+        <button type="button" class="enabled-arrow enabled-arrow--prev" aria-label="Scroll quotes left" hidden>‹</button>
+      <div class="enabled-banner" role="region" aria-label="What investing enabled, in the community's words" tabindex="0">
         <div class="enabled-banner-track">
           <figure class="enabled-card"><svg class="enabled-doodle"><use href="#dd-door"/></svg><figcaption>"It's given me choice. I don't need to stay in a job I'm unhappy in anymore."</figcaption></figure>
           <figure class="enabled-card"><svg class="enabled-doodle"><use href="#dd-mountain"/></svg><figcaption>"4 month backpacking honeymoon inc Everest base camp trek."</figcaption></figure>
@@ -269,8 +272,10 @@
           <figure class="enabled-card" aria-hidden="true"><svg class="enabled-doodle"><use href="#dd-heart"/></svg><figcaption>"Feel slightly less panicked about the state of the world and my daughter's future."</figcaption></figure>
         </div>
       </div>
+        <button type="button" class="enabled-arrow enabled-arrow--next" aria-label="Scroll quotes right" hidden>›</button>
+      </div>
 
-      <p class="enabled-foot">17% said "nothing yet". That's normal, investing is a long game.</p>
+      <p class="enabled-foot">17% said "nothing yet". That's normal, investing is a long game. <span class="enabled-hint">Hover to pause, drag or use the arrows to explore.</span></p>
     </div>
   </section>
 
@@ -342,7 +347,7 @@
 
 <footer class="footer-thin">
   <div class="footer-thin-inner">
-    <nav class="footer-thin-links"><a href="hub/providers.html">Where we invest</a><a href="hub/glossary.html">Glossary</a><a href="mailto:alice@gfy.co.uk">alice@gfy.co.uk</a></nav>
+    <nav class="footer-thin-links"><a href="hub/providers.html">Where we invest</a><a href="hub/glossary.html">Glossary</a><a href="hub/stories.html">Stories</a><a href="mailto:alice@gfy.co.uk">alice@gfy.co.uk</a></nav>
     <div>Not financial advice. Investment value can fall as well as rise. <a href="disclaimer.html">Full disclosures</a></div>
     <div class="footer-thin-meta">
       <span class="footer-gfy"><img src="images/gfy-mark.png" alt="" width="18" height="18"> © 2026 GFY</span>
@@ -406,6 +411,78 @@
 
 <script src="counter.js" defer></script>
 
+<script>
+/* Enabled-quotes banner: auto-scroll + hover-pause + drag/swipe + arrow controls */
+(function () {
+  var wrap = document.querySelector('.enabled-banner-wrap');
+  if (!wrap) return;
+  var banner = wrap.querySelector('.enabled-banner');
+  var track = wrap.querySelector('.enabled-banner-track');
+  var prev = wrap.querySelector('.enabled-arrow--prev');
+  var next = wrap.querySelector('.enabled-arrow--next');
+  if (!banner || !track) return;
+  if (prev) prev.hidden = false;
+  if (next) next.hidden = false;
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var paused = false, dragging = false, resumeT, speed = 0.5;
+  function half() { return track.scrollWidth / 2; }
+  function normalize() {
+    var h = half();
+    if (h <= 0) return;
+    if (banner.scrollLeft >= h) banner.scrollLeft -= h;
+    else if (banner.scrollLeft < 0) banner.scrollLeft += h;
+  }
+  function tick() {
+    if (!paused && !dragging) {
+      banner.scrollLeft += speed;
+      if (banner.scrollLeft >= half()) banner.scrollLeft -= half();
+    }
+    requestAnimationFrame(tick);
+  }
+  if (!reduce) requestAnimationFrame(tick);
+
+  banner.addEventListener('mouseenter', function () { paused = true; });
+  banner.addEventListener('mouseleave', function () { if (!dragging) paused = false; });
+  banner.addEventListener('focusin', function () { paused = true; });
+  banner.addEventListener('focusout', function () { paused = false; });
+
+  function step(dir) {
+    paused = true;
+    var card = track.querySelector('.enabled-card');
+    var d = (card ? card.offsetWidth : 270) + 18;
+    banner.scrollBy({ left: dir * d * 1.4, behavior: 'smooth' });
+    clearTimeout(resumeT);
+    resumeT = setTimeout(function () { normalize(); paused = false; }, 1300);
+  }
+  if (prev) prev.addEventListener('click', function () { step(-1); });
+  if (next) next.addEventListener('click', function () { step(1); });
+
+  var startX = 0, startScroll = 0, moved = false;
+  banner.addEventListener('pointerdown', function (e) {
+    dragging = true; moved = false; paused = true;
+    startX = e.clientX; startScroll = banner.scrollLeft;
+    banner.classList.add('is-dragging');
+    try { banner.setPointerCapture(e.pointerId); } catch (x) {}
+  });
+  banner.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var dx = e.clientX - startX;
+    if (Math.abs(dx) > 3) moved = true;
+    banner.scrollLeft = startScroll - dx;
+    normalize();
+  });
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false; banner.classList.remove('is-dragging');
+    clearTimeout(resumeT);
+    resumeT = setTimeout(function () { paused = false; }, 1300);
+  }
+  banner.addEventListener('pointerup', endDrag);
+  banner.addEventListener('pointercancel', endDrag);
+  banner.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+})();
+</script>
 
 </body>
 </html>

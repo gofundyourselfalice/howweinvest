@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nine Lives, a stay-the-course cat game, How We Invest</title>
+<meta name="description" content="A tiny game about the hardest part of investing: doing nothing. Adopt a cat, ride ten years of markets, and learn why the less you do, the better you usually do.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .game-wrap { max-width: 640px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* ---- Stage ---- */
+  .cat-stage { position: relative; text-align: center; margin: 8px auto 4px; min-height: 220px;
+    display: flex; align-items: flex-end; justify-content: center; }
+  .game-cat { width: clamp(150px, 42vw, 220px); height: auto; transform-origin: center bottom; }
+  .mood-calm   .game-cat { animation: g-breathe 4.5s ease-in-out infinite; }
+  .mood-proud  .game-cat { animation: g-breathe 3.2s ease-in-out infinite, g-bounce 3.2s ease-in-out infinite; }
+  .mood-worried .game-cat { animation: g-tremble 0.35s ease-in-out infinite; }
+  .mood-anxious .game-cat { animation: g-tremble 0.22s ease-in-out infinite; }
+  .mood-tired  .game-cat { animation: g-droop 5s ease-in-out infinite; transform: rotate(-3deg); opacity: .9; }
+  .mood-collapsed .game-cat { filter: grayscale(1); opacity: .55; transform: rotate(4deg); }
+  @keyframes g-breathe { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
+  @keyframes g-bounce  { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-8px) scale(1.05);} }
+  @keyframes g-tremble { 0%,100%{transform:translateX(0) rotate(0);} 25%{transform:translateX(-3px) rotate(-1deg);} 75%{transform:translateX(3px) rotate(1deg);} }
+  @keyframes g-droop   { 0%,100%{transform:rotate(-3deg);} 50%{transform:rotate(-5deg) translateY(2px);} }
+  @media (prefers-reduced-motion: reduce){ .game-cat{animation:none!important;} }
+
+  .cat-accents { position: absolute; inset: 0; pointer-events: none; }
+  .cat-accents span { position: absolute; font-size: 26px; opacity: 0; animation: g-float 2.6s ease-in-out infinite; }
+  @keyframes g-float { 0%{opacity:0; transform:translateY(6px) scale(.7);} 30%{opacity:1;} 100%{opacity:0; transform:translateY(-22px) scale(1.1);} }
+
+  /* ---- Speech bubble ---- */
+  .cat-bubble { position: relative; background: var(--paper-warm); border: 2px solid var(--ink);
+    border-radius: 18px; padding: 14px 18px; max-width: 460px; margin: 18px auto 0;
+    font-size: 16px; line-height: 1.5; color: var(--ink); }
+  .cat-bubble:after { content:""; position:absolute; top:-11px; left:50%; transform:translateX(-50%);
+    border-left:10px solid transparent; border-right:10px solid transparent; border-bottom:11px solid var(--ink); }
+  .cat-bubble:before { content:""; position:absolute; top:-8px; left:50%; transform:translateX(-50%);
+    border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:9px solid var(--paper-warm); z-index:1; }
+
+  /* ---- HUD ---- */
+  .hud { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    background: var(--paper-warm); border: 1px solid var(--line); border-radius: 14px;
+    padding: 12px 16px; margin-bottom: 14px; }
+  .hud-block { text-align: center; flex: 1; }
+  .hud-label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); }
+  .hud-val { font-family: var(--display-serif,'Instrument Serif'); font-size: 26px; line-height: 1.1; color: var(--ink); }
+  .hud-pot { font-variant-numeric: tabular-nums; }
+  .lives { letter-spacing: 2px; font-size: 18px; }
+  .lives .gone { opacity: .2; filter: grayscale(1); }
+
+  /* ---- Market card ---- */
+  .market { border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; margin: 0 0 16px;
+    display: flex; align-items: center; gap: 12px; background: #fff; }
+  .market.up   { background: #EAF6EE; }
+  .market.down { background: #FBEAEF; }
+  .market-arrow { font-size: 30px; line-height: 1; }
+  .market-r { font-family: var(--display-serif,'Instrument Serif'); font-size: 30px; line-height: 1; }
+  .market.up .market-r { color: #1F7A45; }
+  .market.down .market-r { color: var(--accent); }
+  .market-head { font-size: 14px; color: var(--ink); }
+
+  /* ---- Buttons ---- */
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  @media (max-width: 460px){ .choices { grid-template-columns: 1fr; } }
+  .gbtn { font-family: inherit; font-size: 16px; font-weight: 600; padding: 16px 14px; border-radius: 14px;
+    cursor: pointer; border: 2px solid var(--ink); transition: transform .12s ease, box-shadow .12s ease; line-height: 1.3; }
+  .gbtn:hover { transform: translateY(-2px); }
+  .gbtn-calm { background: var(--ink); color: var(--paper); }
+  .gbtn-do   { background: #fff; color: var(--ink); }
+  .gbtn-sub { display: block; font-size: 12px; font-weight: 500; opacity: .7; margin-top: 3px; }
+  .gbtn-next { background: var(--accent); color: #fff; border-color: var(--accent); width: 100%;
+    margin-top: 20px; font-size: 17px; padding: 16px; border-radius: 14px; font-weight: 700; cursor: pointer; }
+  .gbtn-next:hover { transform: translateY(-2px); }
+
+  .verdict { text-align: center; }
+  .verdict-tag { display: inline-block; font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 999px; margin-bottom: 6px; }
+  .tag-good { background: #EAF6EE; color: #1F7A45; }
+  .tag-bad  { background: #FBEAEF; color: var(--accent); }
+
+  /* ---- Intro / results ---- */
+  .panel { text-align: center; }
+  .panel h1 { font-size: clamp(34px, 7vw, 52px); margin: 6px 0 4px; }
+  .panel h1 em { font-style: italic; }
+  .panel .lead-intro { margin: 0 auto 20px; max-width: 480px; }
+  .thesis { font-family: var(--display-serif,'Instrument Serif'); font-size: clamp(22px,4.4vw,30px);
+    line-height: 1.35; color: var(--accent-ink,#8A4B6E); margin: 22px auto; max-width: 520px; }
+  .rules { text-align: left; max-width: 460px; margin: 0 auto 24px; background: var(--paper-warm);
+    border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; font-size: 15px; color: var(--ink); }
+  .rules li { margin: 8px 0; }
+  .res-scores { display: flex; gap: 14px; justify-content: center; margin: 22px 0; flex-wrap: wrap; }
+  .res-card { border: 2px solid var(--ink); border-radius: 16px; padding: 16px 22px; min-width: 150px; }
+  .res-card.faint { border-style: dashed; opacity: .85; }
+  .res-card .hud-label { margin-bottom: 4px; }
+  .res-big { font-family: var(--display-serif,'Instrument Serif'); font-size: 38px; line-height: 1; }
+  .res-card.you .res-big { color: var(--accent); }
+  .res-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+  .disclaimer-line { font-size: 12px; color: var(--mute); margin-top: 28px; max-width: 480px; margin-left:auto; margin-right:auto; }
+  .skip { display:inline-block; margin-top:14px; font-size:13px; color:var(--mute); cursor:pointer; border-bottom:1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="images/hwi-logo.png" alt="How We Invest"></a>
+    <ul class="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="guide.html">Start Here</a></li>
+      <li><a href="hub/providers.html">Invest now</a></li>
+      <li><a href="hub/index.html">Community</a></li>
+      <li><a href="hub/stories.html">Stories</a></li>
+    </ul>
+    <a href="submit.html" class="nav-cta">Contribute</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+    <div class="chapter-mark">A little game</div>
+  </div>
+</header>
+
+<main>
+  <div class="game-wrap" id="game"></div>
+</main>
+
+<footer class="footer-thin">
+  <div class="footer-thin-inner">
+    <nav class="footer-thin-links"><a href="hub/providers.html">Where we invest</a><a href="hub/glossary.html">Glossary</a><a href="hub/stories.html">Stories</a><a href="mailto:alice@gfy.co.uk">alice@gfy.co.uk</a></nav>
+    <div>Not financial advice. A game. Investment value can fall as well as rise. <a href="disclaimer.html">Full disclosures</a></div>
+    <div class="footer-thin-meta">
+      <span>© 2026 GFY</span>
+      <span>A community project</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const CONTRIB = 1000;
+const ROUNDS = [
+  { r: 0.09,  kind:'good',    head:'A calm first year.' },
+  { r: 0.14,  kind:'good',    head:'A strong year. People are cheerful.' },
+  { r:-0.22,  kind:'crash',   head:'Crash. The market falls and the headlines are all red.' },
+  { r: 0.19,  kind:'rebound', head:'The bounce-back. The ones who stayed are smiling.' },
+  { r:-0.07,  kind:'dip',     head:'A wobble. Nothing dramatic, but it stings.' },
+  { r: 0.21,  kind:'good',    head:'A boom. Everyone suddenly has a hot tip.' },
+  { r: 0.03,  kind:'flat',    head:'A quiet, boring year.' },
+  { r:-0.12,  kind:'crash',   head:'Another scare. The news wants you to panic.' },
+  { r: 0.17,  kind:'rebound', head:'Recovery, again. Funny how that keeps happening.' },
+  { r: 0.10,  kind:'good',    head:'A gentle finish.' },
+];
+
+const LINES = {
+  heldDown: [
+    "Down hard. We did the only thing that works: nothing. We nap.",
+    "The whole world is selling. We are not the whole world. We stay.",
+    "A scary number. We don't move. We never move.",
+  ],
+  heldUp: [
+    "Up nicely. And we did… nothing. Nothing is undefeated.",
+    "Look at it grow. All we did was leave it alone.",
+    "A good year. We watched it happen. That's the whole job.",
+  ],
+  heldFlat: [
+    "Barely a flicker. Boring is exactly what we wanted.",
+    "Nothing much happened. Perfect. The nap continues.",
+  ],
+  panic: [
+    "We sold. At the bottom. We don't speak of this year.",
+    "Everyone was scared, so we ran too. The cat regrets it already.",
+    "We locked in the loss. The cat made a small, sad noise.",
+  ],
+  tinker: [
+    "We rearranged everything. The fees waved hello. The cat is tired.",
+    "We chased the shiny thing. The shiny thing chased our returns.",
+    "So much doing, so little point. The cat needs a lie down.",
+  ],
+  reentry: [
+    "Back in — but we sat in cash through the bounce. We missed it. We always do.",
+    "We crept back in after the recovery. Bought high, sold low. Classic us.",
+  ],
+};
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const fmt = n => '£' + Math.round(n).toLocaleString('en-GB');
+
+let S;
+function reset(){
+  S = { year:0, invested:0, cash:0, inMarket:true, lives:9, shadow:0,
+        didSomething:0, panicked:0, tinkered:0, wasOut:false, phase:'intro',
+        bubble:'', mood:'calm', accents:'', lastHead:'', verdict:null };
+}
+
+const game = document.getElementById('game');
+
+function render(){
+  if (S.phase === 'intro')     return renderIntro();
+  if (S.phase === 'results')   return renderResults();
+  if (S.phase === 'gameover')  return renderGameOver();
+  return renderRound();
+}
+
+function renderIntro(){
+  game.innerHTML = `
+    <div class="panel">
+      <div class="cat-stage mood-calm"><img class="game-cat" src="images/cat-logo.png" alt="A sleeping cat"></div>
+      <h1>Nine <em>Lives</em></h1>
+      <p class="lead-intro">Most games reward doing things. This one rewards the opposite.</p>
+      <p class="thesis">Good investing tends to be the opposite of most things, the less you do, the better you usually do.</p>
+      <div class="rules">
+        <strong>How it works</strong>
+        <ul>
+          <li>You adopt a cat and pay <strong>${fmt(CONTRIB)}</strong> into your investments every year, automatically. That's the one good habit, and it needs no effort.</li>
+          <li>Ten years of markets roll past. Some go up. Some crash.</li>
+          <li>Every year you choose: <strong>leave it alone</strong>, or <strong>do something</strong>.</li>
+          <li>Doing something, selling in a panic or fiddling when bored, costs your cat one of its nine lives. Doing nothing keeps it calm.</li>
+          <li>At the end we compare you to the cat who did absolutely nothing.</li>
+        </ul>
+      </div>
+      <button class="gbtn-next" style="max-width:320px" onclick="startGame()">Adopt the cat →</button>
+      <p class="disclaimer-line">This is a game, not advice or a forecast. Real markets don't follow a script and your capital is always at risk. <a href="disclaimer.html">More</a></p>
+    </div>`;
+}
+
+function startGame(){ reset(); S.phase='play'; startYear(); }
+
+function startYear(){
+  const Y = ROUNDS[S.year];
+  // annual auto-contribution lands wherever the money currently sits
+  if (S.inMarket) S.invested += CONTRIB; else S.cash += CONTRIB;
+  S.shadow += CONTRIB;
+  // the market moves
+  if (S.inMarket) S.invested *= (1 + Y.r);
+  S.shadow *= (1 + Y.r);
+  S.wasOut = !S.inMarket; // were we sitting out this year (from a prior panic)?
+  // auto re-enter: fold any sidelined cash back into the market going forward
+  if (!S.inMarket){ S.invested += S.cash; S.cash = 0; S.inMarket = true; }
+  // set the scene + temptation
+  if (S.wasOut){ S.mood='tired'; S.accents='😮‍💨'; S.bubble = pick(LINES.reentry); }
+  else if (Y.r < 0){ S.mood='worried'; S.accents='💧'; S.bubble = "That's a drop. Everyone's saying sell. …do we?"; }
+  else if (Y.kind === 'flat'){ S.mood='calm'; S.accents='💤'; S.bubble = "A quiet year. Nothing really to do."; }
+  else { S.mood='calm'; S.accents='✨'; S.bubble = "Up again. We could fiddle with it. Or we could not."; }
+  S.verdict = null;
+  S.phase = 'decide';
+  render();
+}
+
+function leaveAlone(){
+  const Y = ROUNDS[S.year];
+  let tag, line;
+  if (Y.r < 0){ tag='good'; line = pick(LINES.heldDown); S.mood='proud'; S.accents='💗'; }
+  else if (Y.kind === 'flat'){ tag='good'; line = pick(LINES.heldFlat); S.mood='calm'; S.accents='💤'; }
+  else { tag='good'; line = pick(LINES.heldUp); S.mood='proud'; S.accents='✨💗'; }
+  S.verdict = { tag, label:'Did nothing', line };
+  S.phase = 'verdict';
+  render();
+}
+
+function doSomething(){
+  const Y = ROUNDS[S.year];
+  S.lives--; S.didSomething++;
+  let line, tag='bad';
+  if (Y.r < 0){
+    // panic sell: bail to cash, sit out next year, take the rebound miss
+    S.panicked++;
+    S.cash += S.invested; S.invested = 0; S.inMarket = false;
+    S.mood='anxious'; S.accents='💧❗'; line = pick(LINES.panic);
+    S.verdict = { tag, label:'Sold in a panic', line };
+  } else {
+    // tinker: overtrading drag
+    S.tinkered++;
+    S.invested *= 0.98;
+    S.mood='tired'; S.accents='😮‍💨'; line = pick(LINES.tinker);
+    S.verdict = { tag, label:'Fiddled with it', line };
+  }
+  if (S.lives <= 0){ S.phase = 'gameover'; render(); return; }
+  S.phase = 'verdict';
+  render();
+}
+
+function advance(){
+  S.year++;
+  if (S.year >= ROUNDS.length){ S.phase = 'results'; render(); return; }
+  startYear();
+}
+
+function livesHTML(){
+  let s = '';
+  for (let i=0;i<9;i++) s += `<span class="${i < S.lives ? '' : 'gone'}">🐾</span>`;
+  return `<span class="lives">${s}</span>`;
+}
+
+function stageHTML(){
+  const acc = (S.accents||'').split('').map((c,i)=>
+    `<span style="left:${[18,68,40,80,28][i%5]}%; top:${[20,12,4,30,16][i%5]}%; animation-delay:${i*0.4}s">${c}</span>`
+  ).join('');
+  return `<div class="cat-stage mood-${S.mood}">
+      <div class="cat-accents">${acc}</div>
+      <img class="game-cat" src="images/cat-logo.png" alt="">
+    </div>
+    <div class="cat-bubble">${S.bubble}</div>`;
+}
+
+function renderRound(){
+  const Y = ROUNDS[S.year];
+  const pot = S.invested + S.cash;
+  const up = Y.r >= 0;
+  const pct = (Y.r*100).toFixed(0);
+  const marketHTML = `
+    <div class="market ${up?'up':'down'}">
+      <span class="market-arrow">${up?'📈':'📉'}</span>
+      <div>
+        <span class="market-r">${up?'+':''}${pct}%</span>
+        <div class="market-head">Year ${S.year+1}: ${Y.head}${S.wasOut?' <em>(you were sitting in cash)</em>':''}</div>
+      </div>
+    </div>`;
+
+  let action;
+  if (S.phase === 'decide'){
+    const right = Y.r < 0
+      ? `<button class="gbtn gbtn-do" onclick="doSomething()">Sell, make it stop 😰<span class="gbtn-sub">move it all to cash</span></button>`
+      : `<button class="gbtn gbtn-do" onclick="doSomething()">Tinker with it 🔧<span class="gbtn-sub">chase, switch, rearrange</span></button>`;
+    action = `<div class="choices">
+        <button class="gbtn gbtn-calm" onclick="leaveAlone()">Leave it alone 😴<span class="gbtn-sub">do absolutely nothing</span></button>
+        ${right}
+      </div>`;
+  } else {
+    const v = S.verdict;
+    action = `<div class="verdict">
+        <span class="verdict-tag tag-${v.tag}">${v.label}</span>
+        <button class="gbtn-next" onclick="advance()">${S.year+1 >= ROUNDS.length ? 'See how you did →' : 'Next year →'}</button>
+      </div>`;
+  }
+
+  game.innerHTML = `
+    <div class="hud">
+      <div class="hud-block"><div class="hud-label">Year</div><div class="hud-val">${S.year+1}<span style="font-size:16px;color:var(--mute)">/10</span></div></div>
+      <div class="hud-block"><div class="hud-label">Your pot</div><div class="hud-val hud-pot">${fmt(pot)}</div></div>
+      <div class="hud-block"><div class="hud-label">Nine lives</div>${livesHTML()}</div>
+    </div>
+    ${marketHTML}
+    ${stageHTML()}
+    ${action}`;
+}
+
+function renderResults(){
+  const you = S.invested + S.cash;
+  const calm = S.shadow;
+  const gap = Math.max(0, calm - you);
+  const livesLost = 9 - S.lives;
+  let mood, headline, body;
+  if (S.didSomething === 0){
+    mood='proud';
+    headline = "You did <em>nothing</em>. For ten whole years.";
+    body = `Not one twitch. Your cat is enormous, glossy and fast asleep on top of ${fmt(you)}. You and the calm cat are the same cat.`;
+  } else {
+    mood = livesLost >= 5 ? 'collapsed' : 'tired';
+    headline = "The cost of <em>doing something</em>";
+    body = `The cat who did absolutely nothing finished with <strong>${fmt(calm)}</strong>. You finished with <strong>${fmt(you)}</strong>. `
+      + (gap > 0
+          ? `Fidgeting cost you <strong>${fmt(gap)}</strong> and ${livesLost} of your cat's nine lives.`
+          : `You came out level, but it cost ${livesLost} of your cat's nine lives and a lot of worry.`)
+      + (S.panicked > 0 ? ` The expensive bit was selling when it was scary, ${S.panicked} time${S.panicked>1?'s':''}, and missing the bounce that always seemed to follow.` : '');
+  }
+
+  game.innerHTML = `
+    <div class="panel">
+      <div class="cat-stage mood-${mood}">
+        <div class="cat-accents">${S.didSomething===0?'<span style="left:30%;top:8%">💗</span><span style="left:64%;top:14%;animation-delay:.5s">✨</span>':''}</div>
+        <img class="game-cat" src="images/cat-logo.png" alt="">
+      </div>
+      <h1>${headline}</h1>
+      <div class="res-scores">
+        <div class="res-card you"><div class="hud-label">You finished with</div><div class="res-big">${fmt(you)}</div></div>
+        <div class="res-card faint"><div class="hud-label">The do-nothing cat</div><div class="res-big">${fmt(calm)}</div></div>
+      </div>
+      <p class="lead-intro">${body}</p>
+      <p class="thesis">The less you did, the better you did. That's the whole secret, and it's the hardest one to follow.</p>
+      <div class="res-actions">
+        <button class="gbtn-next" style="max-width:220px" onclick="startGame()">Play again ↺</button>
+        <a class="gbtn gbtn-do" href="guide.html#staying-the-course" style="display:inline-block;text-decoration:none;text-align:center">Read: Staying the Course</a>
+      </div>
+      <div class="res-actions" style="margin-top:10px">
+        <a class="skip" href="#" onclick="shareGame(event)">Share Nine Lives</a>
+        <a class="skip" href="submit.html">Add how you invest →</a>
+      </div>
+      <p class="disclaimer-line">A game, not advice or a forecast. Real markets don't run to a script, past performance doesn't predict the future, and your capital is always at risk.</p>
+    </div>`;
+}
+
+function renderGameOver(){
+  game.innerHTML = `
+    <div class="panel">
+      <div class="cat-stage mood-collapsed"><img class="game-cat" src="images/cat-logo.png" alt="An exhausted cat"></div>
+      <h1>Out of <em>lives</em></h1>
+      <p class="lead-intro">Nine lives, all spent on panicking and fiddling. Even a cat can't outrun that much doing. The good news: in real life you get to start again, calmer.</p>
+      <p class="thesis">Next time, try doing less. Much less. Ideally nothing.</p>
+      <button class="gbtn-next" style="max-width:280px" onclick="startGame()">Try again, calmly ↺</button>
+    </div>`;
+}
+
+function shareGame(e){
+  e.preventDefault();
+  const text = "I played Nine Lives — a game where the only way to win at investing is to do nothing. My cat survived (mostly).";
+  const url = location.href;
+  if (navigator.share){ navigator.share({ title:'Nine Lives', text, url }).catch(()=>{}); }
+  else if (navigator.clipboard){ navigator.clipboard.writeText(text + ' ' + url); alert('Copied to clipboard 🐾'); }
+}
+
+reset();
+render();
+</script>
+
+<script src="nav.js" defer></script>
+</body>
+</html>

@@ -63,7 +63,8 @@
         </div>
       </li>
       <li><a href="providers.html" class="nav-tip" data-tip="The platforms our community actually uses, with fees and current sign-up offers.">Invest now</a></li>
-      <li><a href="index.html" class="active">Community</a></li>
+      <li><a href="index.html">Community</a></li>
+      <li><a href="stories.html" class="active">Stories</a></li>
     </ul>
     <a href="../submit.html" class="nav-cta">Contribute</a>
   </div>
@@ -80,76 +81,32 @@
 <main>
   <div class="container">
 
-    <article class="story" id="story-01">
-      <div class="story-grid">
-        <aside class="story-profile">
-          <span class="story-eyebrow">Story 01 · in her words</span>
-          <h2 class="story-pull">&ldquo;A downturn just means cheaper shares.&rdquo;</h2>
-          <dl class="story-facts">
-            <div><dt>Age</dt><dd>34</dd></div>
-            <div><dt>Lives</dt><dd>Portugal (via Birmingham &amp; Dubai)</dd></div>
-            <div><dt>Work</dt><dd>Remote lawyer</dd></div>
-            <div><dt>Portfolio</dt><dd>~&euro;100,000</dd></div>
-            <div><dt>Holds</dt><dd>One global ETF (~80% equities / 20% bonds), plus property</dd></div>
-            <div><dt>Investing since</dt><dd>2020</dd></div>
-          </dl>
-        </aside>
-        <div class="story-body">
-          <p>I'm 34, originally from Birmingham, and after a stint in Dubai I now live in Portugal, working remotely as a lawyer. I'm married, with no children.</p>
-          <p>It was during Covid that things clicked. With more time to reflect, I realised the money sitting in my bank account was quietly losing value to inflation. I've always carried a bit of anxiety around money, so handing it over to something uncertain felt uncomfortable, but the more I read, the clearer it became: leaving cash in a low-yield account was effectively gambling against inflation.</p>
-          <p>I didn't grow up in a house that talked about money or investing, so I taught myself. <em>The Psychology of Money</em> by Morgan Housel showed me that doing well with money is about behaviour and mindset, not raw intelligence, and that staying invested beats trying to time the market. <em>The Simple Path to Wealth</em> by JL Collins gave me a clear roadmap: spend less than you earn, avoid debt, and invest the difference in low-cost index funds. Later, podcasts aimed at DIY and female investors reinforced that it doesn't have to be complicated or scary if you're disciplined.</p>
-          <p>Today I've invested roughly &euro;100,000 into a single global ETF, about 80% equities and 20% bonds. My portfolio is up around 12% since I started, and that's having weathered some real storms. I took significant losses during the early Covid crash and again after the 2020 US election, but I didn't panic-sell. I stayed the course and kept buying. I've never withdrawn a penny of my capital; I'm in it for the long haul, and that discipline has paid off. I also owned a rental property, which I sold last year and reinvested into a second property abroad, to diversify into real estate alongside the market.</p>
-          <p>Investing has already changed things for me. I've cleared nearly all my personal debt apart from the mortgage, funded our wedding without borrowing, and built a deposit big enough to buy our home in a competitive market, money that doubles as our emergency fund. As a contractor, it also means I could take unpaid maternity leave if I ever needed to, because I know the buffer is there.</p>
-          <p>I invest to pay off the mortgage, reach financial independence, and live life on our own terms. We love our home and aren't planning to move, so clearing that one payment would be huge. Financial independence, to me, means having enough from investments and assets to support my family and goals without depending on a paycheck.</p>
-          <p>Honestly, I feel empowered and far more confident than I used to, though I'm always a little nervous. Markets haven't always been kind, and it's hard watching your balance swing so wildly. Right now we've paused our monthly contributions while we fund some home renovations, but I take comfort knowing a substantial amount is still in the market, working for us.</p>
-          <p>My biggest regret? Not starting sooner. If I'd understood compound interest in my teens or early twenties, it would have made a world of difference. I carried credit-card and student debt into my late twenties with zero financial education, when really I shouldn't have been in debt at all. The penny dropped when I watched friends who'd started tiny, early investments pull far ahead. I delayed, and I paid for it in lost time in the market, the one thing you can never get back.</p>
-          <p class="story-disclaimer">Shared anonymously with permission. One person's experience, not advice or a recommendation. Capital is always at risk.</p>
-        </div>
-      </div>
-    </article>
-
-    <h3 class="story-more-heading">The kinds of stories we'll be featuring</h3>
-    <div class="hub-grid">
-      <div class="hub-card hub-card--ghost">
-        <h4>Started with very little</h4>
-        <p>Stories from people who began with £25 a month or less. What they did, what they wish they'd known, where they are now.</p>
-      </div>
-      <div class="hub-card hub-card--ghost">
-        <h4>Started late</h4>
-        <p>For everyone who feels like they've missed the boat. Spoiler: you haven't.</p>
-      </div>
-      <div class="hub-card hub-card--ghost">
-        <h4>Investing for retirement</h4>
-        <p>People building toward stopping work, whether at 65 or earlier.</p>
-      </div>
-      <div class="hub-card hub-card--ghost">
-        <h4>Investing for my kids</h4>
-        <p>Junior ISAs, pensions for children, savings for university. What different families have chosen and why.</p>
-      </div>
-      <div class="hub-card hub-card--ghost">
-        <h4>100k stories</h4>
-        <p>What it actually took to get to a six-figure portfolio, over how long, with what habits.</p>
-      </div>
-      <div class="hub-card hub-card--ghost">
-        <h4>Made mistakes and recovered</h4>
-        <p>Panic-sold in 2020. Paid an advisor too much. Picked the wrong stocks. Here's what they did next.</p>
+    <div class="stories-controls">
+      <span class="stories-filter-label">Filter by:</span>
+      <div class="stories-filters" id="storiesFilters" role="group" aria-label="Filter stories">
+        <button type="button" class="stories-chip is-active" data-tag="all" aria-pressed="true">All stories <span class="stories-chip-count"></span></button>
+        <button type="button" class="stories-chip" data-tag="index-etf" aria-pressed="false">Index funds &amp; ETFs <span class="stories-chip-count"></span></button>
+        <button type="button" class="stories-chip" data-tag="isa" aria-pressed="false">Stocks &amp; shares ISA <span class="stories-chip-count"></span></button>
+        <button type="button" class="stories-chip" data-tag="pension" aria-pressed="false">Pension <span class="stories-chip-count"></span></button>
+        <button type="button" class="stories-chip" data-tag="property" aria-pressed="false">Property <span class="stories-chip-count"></span></button>
+        <button type="button" class="stories-chip" data-tag="kids" aria-pressed="false">Investing for kids <span class="stories-chip-count"></span></button>
+        <button type="button" class="stories-chip" data-tag="six-figure" aria-pressed="false">Six-figure portfolio <span class="stories-chip-count"></span></button>
       </div>
     </div>
 
-    <div class="narrow">
-      <div class="online-feature">
-        <strong>Coming soon</strong>
-        Video and text cards, similar to the Financial Confessions series, participant-filmed or interview-style shorts, 2–5 minutes each. Each card will include name/handle, one-line summary, and the video. New submissions accepted via the share-your-story form.
-      </div>
+    <div class="stories-list" id="storiesList"></div>
+    <p class="stories-empty" id="storiesEmpty" hidden>No stories match that filter yet, try another.</p>
 
-      <p style="margin-top:40px;"><a href="../submit.html" class="btn btn-primary">Share your story <span class="btn-arrow">→</span></a></p>
+    <div class="narrow" style="margin-top:48px;">
+      <p>Every story here is real and shared with permission. We never publish names, emails or handles. One person's experience is never advice or a recommendation, and capital is always at risk.</p>
+      <p style="margin-top:28px;"><a href="../submit.html" class="btn btn-primary">Share your story <span class="btn-arrow">→</span></a></p>
     </div>
   </div>
 </main>
 
 <footer class="footer-thin">
   <div class="footer-thin-inner">
-    <nav class="footer-thin-links"><a href="providers.html">Where we invest</a><a href="glossary.html">Glossary</a><a href="mailto:alice@gfy.co.uk">alice@gfy.co.uk</a></nav>
+    <nav class="footer-thin-links"><a href="providers.html">Where we invest</a><a href="glossary.html">Glossary</a><a href="stories.html">Stories</a><a href="mailto:alice@gfy.co.uk">alice@gfy.co.uk</a></nav>
     <div>Not financial advice. Investment value can fall as well as rise. <a href="../disclaimer.html">Full disclosures</a></div>
     <div class="footer-thin-meta">
       <span>© 2026 GFY</span>
@@ -158,7 +115,102 @@
   </div>
 </footer>
 
+<script src="../stories-data.js" defer></script>
 <script src="../nav.js" defer></script>
+<script>
+(function () {
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  function build() {
+    var data = window.HWI_STORIES || [];
+    var list = document.getElementById("storiesList");
+    var filters = document.getElementById("storiesFilters");
+    var empty = document.getElementById("storiesEmpty");
+    if (!list || !data.length) return;
+
+    // Render cards
+    data.forEach(function (s, i) {
+      var facts = [];
+      if (s.age) facts.push("<li><b>" + esc(s.age) + "</b> years old</li>");
+      if (s.region) facts.push("<li>" + esc(s.region) + "</li>");
+      if (s.work) facts.push("<li>" + esc(s.work) + "</li>");
+      if (s.portfolio) facts.push("<li>" + esc(s.portfolio) + " invested</li>");
+
+      var dl = [];
+      if (s.holds) dl.push("<div><dt>Holds</dt><dd>" + esc(s.holds) + "</dd></div>");
+      if (s.since) dl.push("<div><dt>Investing since</dt><dd>" + esc(s.since) + "</dd></div>");
+
+      var paras = (s.body || []).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
+      paras += '<p class="story-disclaimer">Shared anonymously with permission. One person’s experience, not advice or a recommendation. Capital is always at risk.</p>';
+
+      var art = document.createElement("article");
+      art.className = "story-card";
+      art.setAttribute("data-tags", (s.tags || []).join(" "));
+      art.innerHTML =
+        '<div class="story-card-head">' +
+          '<span class="story-card-mark">Story ' + String(i + 1).padStart(2, "0") + '</span>' +
+          '<h2 class="story-card-title">“' + esc(s.title) + '”</h2>' +
+          (facts.length ? '<ul class="story-card-meta">' + facts.join("") + '</ul>' : '') +
+        '</div>' +
+        '<p class="story-card-teaser">' + esc(s.teaser) + '</p>' +
+        '<div class="story-card-full" hidden>' +
+          (dl.length ? '<dl class="story-facts">' + dl.join("") + '</dl>' : '') +
+          '<div class="story-card-text">' + paras + '</div>' +
+        '</div>' +
+        '<button type="button" class="story-card-toggle" aria-expanded="false">Read the full story <span class="btn-arrow">→</span></button>';
+      list.appendChild(art);
+
+      var full = art.querySelector(".story-card-full");
+      var btn = art.querySelector(".story-card-toggle");
+      btn.addEventListener("click", function () {
+        var open = full.hasAttribute("hidden");
+        if (open) { full.removeAttribute("hidden"); btn.setAttribute("aria-expanded", "true"); btn.firstChild.textContent = "Hide story "; }
+        else { full.setAttribute("hidden", ""); btn.setAttribute("aria-expanded", "false"); btn.firstChild.textContent = "Read the full story "; }
+      });
+    });
+
+    // Filter counts
+    var cards = Array.prototype.slice.call(list.querySelectorAll(".story-card"));
+    filters.querySelectorAll(".stories-chip").forEach(function (chip) {
+      var tag = chip.getAttribute("data-tag");
+      var n = tag === "all" ? cards.length : cards.filter(function (c) {
+        return c.getAttribute("data-tags").split(" ").indexOf(tag) !== -1;
+      }).length;
+      var span = chip.querySelector(".stories-chip-count");
+      if (span) span.textContent = n;
+      if (n === 0 && tag !== "all") chip.setAttribute("hidden", "");
+    });
+
+    // Filter behaviour
+    filters.addEventListener("click", function (e) {
+      var chip = e.target.closest(".stories-chip");
+      if (!chip) return;
+      var tag = chip.getAttribute("data-tag");
+      filters.querySelectorAll(".stories-chip").forEach(function (c) {
+        c.classList.toggle("is-active", c === chip);
+        c.setAttribute("aria-pressed", c === chip ? "true" : "false");
+      });
+      var shown = 0;
+      cards.forEach(function (c) {
+        var match = tag === "all" || c.getAttribute("data-tags").split(" ").indexOf(tag) !== -1;
+        c.hidden = !match;
+        if (match) shown++;
+      });
+      empty.hidden = shown !== 0;
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", build);
+  } else {
+    build();
+  }
+})();
+</script>
 
 </body>
 </html>

@@ -97,7 +97,8 @@
         // Invested: illustrative ~7% a year, with some smoothed dips
         var stocks = amount * Math.pow(1.07, y);
         // Dips around year 8 (GFC), year 20 (Covid), year 22 (inflation)
-        if (y === 8 || y === 9) stocks *= 0.74;
+        if (y === 8) stocks *= 0.82;
+        if (y === 9) stocks *= 0.90;
         if (y === 20) stocks *= 0.85;
         if (y === 22) stocks *= 0.92;
         data.push({ year: y, cash: cash, stocks: stocks });
