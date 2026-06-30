@@ -25,3 +25,8 @@ dist/
 MONETISATION_STRATEGY.md
 brand/
 outputs/
+
+# Internal spreadsheets & office temp files — not for the public site
+*.xlsx
+*.xls
+.~lock.*#
